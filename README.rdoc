@@ -2,11 +2,11 @@
 
 {<img src="https://secure.travis-ci.org/matthutchinson/acts_as_textcaptcha.png" alt="Travis Build Status" align="absmiddle"/>}[https://travis-ci.org/matthutchinson/acts_as_textcaptcha] {<img src="https://codeclimate.com/badge.png" align="absmiddle" alt="Code Climate Stats" />}[https://codeclimate.com/github/matthutchinson/acts_as_textcaptcha]
 
-ActsAsTextcaptcha provides spam protection for your Rails models using logic questions from the excellent {Text CAPTCHA}[http://textcaptcha.com/] web service (by {Rob Tuley}[http://openknot.com/me/] of {Openknot}[http://openknot.com/]).  It is also possible to configure your own questions and answers instead of using this API (or as a fall back in the unlikely event of the web service being unavailable)
+ActsAsTextcaptcha provides spam protection for your Rails models using logic questions from the excellent {Text CAPTCHA}[http://textcaptcha.ir/] web service (by {Rob Tuley}[http://openknot.com/me/] of {Openknot}[http://openknot.com/]).  It is also possible to configure your own questions and answers instead of using this API (or as a fall back in the unlikely event of the web service being unavailable)
 
 The gem makes use of {bcrypt}[http://bcrypt-ruby.rubyforge.org/] encryption when comparing a guess with the correct answer(s).  This gem is actively maintained, has good test coverage and is compatible with Rails 2.3.* and 3.  If you have any issues {please report them here}[https://github.com/matthutchinson/acts_as_textcaptcha/issues].
 
-Text CAPTCHA's logic questions are aimed at a child's age of 7, so can be solved easily by all but the most cognitively impaired users. As they involve human logic, such questions cannot be solved by a robot.  There are both advantages and disadvantages for using logic questions over image based captchas, {find out more at Text CAPTCHA}[http://textcaptcha.com/why].
+Text CAPTCHA's logic questions are aimed at a child's age of 7, so can be solved easily by all but the most cognitively impaired users. As they involve human logic, such questions cannot be solved by a robot.  There are both advantages and disadvantages for using logic questions over image based captchas, {find out more at Text CAPTCHA}[http://textcaptcha.ir/why].
 
 == Demo
 
@@ -44,7 +44,7 @@ If you do decide to install this as a Rails plugin, you'll have to manually incl
 
 *NOTE:* The procedure for configuring your app *changed significantly* from v2.* to v3.*  If you are having problems please carefully check the instructions below.
 
-First {grab an API key for your website}[http://textcaptcha.com/api] then open Rails console (or any irb session) and generate a new BCrypt salt by typing;
+First {grab an API key for your website}[http://textcaptcha.ir/api] then open Rails console (or any irb session) and generate a new BCrypt salt by typing;
 
   require 'bcrypt';BCrypt::Engine.generate_salt
 
@@ -106,7 +106,7 @@ The gem can be configured for models individually (as shown above) or with a con
                                          { 'question' => 'The green hat is what color?', 'answers' => 'green' }]
   end
 
-* *api_key* (get from http://textcaptcha.com/api)
+* *api_key* (get from http://textcaptcha.ir/api)
 * *bcrypt_salt* - used to encrypt the valid possible answers
 * *bcrypt_cost* - an optional logarithmic number which determines how computationally expensive the bcrypt hash will be (a cost of 4 is twice as much work as a cost of 3 - the default is 10)
 * *questions* - an array of question and answer hashes (see above) A random question from this array will be asked if the web service fails OR if no API key has been set.  Multiple answers to the same question are comma separated (e.g. 2,two) so don't use commas in your answers!
@@ -176,7 +176,7 @@ What do you need?
 * {Rails}[http://github.com/rails/rails] >= 2.3.2  (including Rails 3)
 * {Ruby}[http://ruby-lang.org/] >= 1.8.7 (also tested with REE and Ruby 1.9.2)
 * {bcrypt-ruby}[http://bcrypt-ruby.rubyforge.org/] gem (to securely encrypt spam answers)
-* {Text CAPTCHA API key}[http://textcaptcha.com/register] (_optional_, since you can define your own logic questions)
+* {Text CAPTCHA API key}[http://textcaptcha.ir/register] (_optional_, since you can define your own logic questions)
 * {MiniTest}[https://rubygems.org/gems/minitest] (_optional_ if you want to run the tests, built into Ruby 1.9)
 * {SimpleCov}[https://rubygems.org/gems/simplecov] (_optional_ if you want to run the tests with code coverage reporting)
 
@@ -193,7 +193,7 @@ What do you need?
 == Who's who?
 
 * {ActsAsTextcaptcha}[http://github.com/matthutchinson/acts_as_textcaptcha] and {little robot drawing}[http://www.flickr.com/photos/hiddenloop/4541195635/] by {Matthew Hutchinson}[http://matthewhutchinson.net]
-* {Text CAPTCHA}[http://textcaptcha.com] API and service by {Rob Tuley}[http://openknot.com/me/] at {Openknot}[http://openknot.com]
+* {Text CAPTCHA}[http://textcaptcha.ir] API and service by {Rob Tuley}[http://openknot.com/me/] at {Openknot}[http://openknot.com]
 * {bcrypt-ruby}[http://bcrypt-ruby.rubyforge.org/] Gem by {Coda Hale}[http://codahale.com]
 
 == Todo

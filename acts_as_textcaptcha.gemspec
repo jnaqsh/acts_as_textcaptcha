@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
   s.authors     = ["Matthew Hutchinson"]
   s.email       = ["matt@hiddenloop.com"]
   s.homepage    = "http://github.com/matthutchinson/acts_as_textcaptcha"
-  s.summary     = %q{Spam protection for your models via logic questions and the textcaptcha.com API}
+  s.summary     = %q{Spam protection for your models via logic questions and the textcaptcha.ir API}
   s.description = %q{Simple question/answer based spam protection for your Rails models.
-  You can define your own logic questions and/or fetch questions from the textcaptcha.com API.
+  You can define your own logic questions and/or fetch questions from the textcaptcha.ir API.
   The questions involve human logic and are tough for spam bots to crack.
-  For more reasons on why logic questions are a good idea visit; http://textcaptcha.com/why}
+  For more reasons on why logic questions are a good idea visit; http://textcaptcha.ir/why}
 
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE']
 

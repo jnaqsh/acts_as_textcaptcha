@@ -20,7 +20,7 @@ namespace :textcaptcha do
       f = File.new(dest, 'w')
       f.write(config)
       f.close
-      puts "\ntextcaptcha.yml generated at #{dest} (with a new BCrypt salt)\nNOTE: edit this file and add your textcaptcha api key, grab one from http://textcaptcha.com/api\n\n"
+      puts "\ntextcaptcha.yml generated at #{dest} (with a new BCrypt salt)\nNOTE: edit this file and add your textcaptcha api key, grab one from http://textcaptcha.ir/api\n\n"
     end
   end
 end

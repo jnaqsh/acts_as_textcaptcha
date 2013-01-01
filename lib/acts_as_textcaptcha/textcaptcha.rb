@@ -27,7 +27,7 @@ module ActsAsTextcaptcha
 
   module Textcaptcha #:nodoc:
 
-    # raised if an empty response is ever returned from textcaptcha.com web service
+    # raised if an empty response is ever returned from textcaptcha.ir web service
     class BadResponse < StandardError; end;
 
     def acts_as_textcaptcha(options = nil)
@@ -78,7 +78,7 @@ module ActsAsTextcaptcha
           if textcaptcha_config[:api_key]
             begin
               uri_parser = URI.const_defined?(:Parser) ? URI::Parser.new : URI # URI.parse is deprecated in 1.9.2
-              response   = Net::HTTP.get(uri_parser.parse("http://textcaptcha.com/api/#{textcaptcha_config[:api_key]}"))
+              response   = Net::HTTP.get(uri_parser.parse("http://textcaptcha.ir/api/#{textcaptcha_config[:api_key]}"))
               if response.empty?
                 raise Textcaptcha::BadResponse
               else
