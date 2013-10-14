@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "acts_as_textcaptcha"
   s.version     = ActsAsTextcaptcha::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Matthew Hutchinson"]
-  s.email       = ["matt@hiddenloop.com"]
-  s.homepage    = "http://github.com/matthutchinson/acts_as_textcaptcha"
+  s.authors     = ["Hamed Ramezanian", "Matthew Hutchinson"]
+  s.email       = ["hamed.ramezanian.nik@gmail.com", "matt@hiddenloop.com"]
+  s.homepage    = "http://github.com/jnaqsh/acts_as_textcaptcha"
   s.summary     = %q{Spam protection for your models via logic questions and the textcaptcha.ir API}
   s.description = %q{Simple question/answer based spam protection for your Rails models.
   You can define your own logic questions and/or fetch questions from the textcaptcha.ir API.
@@ -17,11 +17,13 @@ Gem::Specification.new do |s|
 
   s.extra_rdoc_files = ['README.rdoc', 'LICENSE']
 
+  s.cert_chain  = ['gem-public_cert.pem']
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency('bcrypt-ruby')
+  s.add_dependency('bcrypt-ruby', '~> 3.0.1')
 
   s.add_development_dependency('rails')
   s.add_development_dependency('bundler')
@@ -30,4 +32,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rdoc')
   s.add_development_dependency('sqlite3')
   s.add_development_dependency('fakeweb')
+  s.add_development_dependency('strong_parameters')
 end

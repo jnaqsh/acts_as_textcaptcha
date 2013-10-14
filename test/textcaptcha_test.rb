@@ -73,6 +73,25 @@ describe 'Textcaptcha' do
     end
   end
 
+  describe 'with strong parameters' do
+
+    before(:each) do
+      @widget = StrongWidget.new
+    end
+
+    it 'should work' do
+      @widget.spam_answers.must_be_nil
+      @widget.textcaptcha
+      @widget.spam_question.must_equal('1+1')
+      @widget.valid?.must_equal false
+      @widget.errors[:spam_answer].first.must_equal('is incorrect, try another question instead')
+
+      @widget.spam_answer = 'two'
+      @widget.valid?.must_equal true
+      @widget.errors[:spam_answer].must_be_empty
+    end
+  end
+
   describe 'encryption' do
 
     before(:each) do
@@ -195,7 +214,7 @@ describe 'Textcaptcha' do
       Review.textcaptcha_config.must_equal({ :api_key     => '8u5ixtdnq9csc84cok0owswgo',
                                              :bcrypt_salt => '$2a$10$j0bmycH.SVfD1b5mpEGPpe',
                                              :bcrypt_cost => '3',
-                                             :questions   => [{ 'question' => 'The green hat is what color?', 'answers' => 'green' }]})
+                                             :questions   => [{ :question => 'The green hat is what color?', :answers => 'green' }]})
     end
 
     it 'should be configured with textcaptcha.yml' do

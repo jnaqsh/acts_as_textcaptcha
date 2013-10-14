@@ -35,10 +35,10 @@ module ActsAsTextcaptcha
       attr_accessor  :spam_question, :spam_answers, :spam_answer, :skip_textcaptcha
 
       if respond_to?(:accessible_attributes)
-        if accessible_attributes.nil?
+        if accessible_attributes.nil? && respond_to?(:attr_protected)
           attr_protected :spam_question
           attr_protected :skip_textcaptcha
-        else
+        elsif respond_to?(:attr_accessible)
           attr_accessible :spam_answer, :spam_answers
         end
       end
@@ -78,11 +78,15 @@ module ActsAsTextcaptcha
           if textcaptcha_config[:api_key]
             begin
               uri_parser = URI.const_defined?(:Parser) ? URI::Parser.new : URI # URI.parse is deprecated in 1.9.2
-              response   = Net::HTTP.get(uri_parser.parse("http://api.textcaptcha.ir/#{textcaptcha_config[:api_key]}"))
-              if response.empty?
+              url = uri_parser.parse("http://api.textcaptcha.ir/#{textcaptcha_config[:api_key]}")
+              http = Net::HTTP.new(url.host, url.port)
+              http.open_timeout = textcaptcha_config[:http_open_timeout] if textcaptcha_config[:http_open_timeout]
+              http.read_timeout = textcaptcha_config[:http_read_timeout] if textcaptcha_config[:http_read_timeout]
+              response = http.get(url.path)
+              if response.body.empty?
                 raise Textcaptcha::BadResponse
               else
-                parse_textcaptcha_xml(response)
+                parse_textcaptcha_xml(response.body)
               end
               return
             rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED, Errno::ETIMEDOUT,
