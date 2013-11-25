@@ -51,7 +51,7 @@ class Contact
 end
 
 # ActiveRecord model using the strong parameters gem
-require 'strong_parameters'
+# require 'strong_parameters'
 
 class StrongWidget < ActiveRecord::Base
   include ActiveModel::ForbiddenAttributesProtection

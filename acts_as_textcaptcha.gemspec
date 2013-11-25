@@ -23,14 +23,14 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency('bcrypt-ruby', '~> 3.0.1')
+  s.add_dependency('bcrypt-ruby', '~> 3.1.2')
 
-  s.add_development_dependency('rails')
+  s.add_development_dependency('rails', '~> 4.0.1')
   s.add_development_dependency('bundler')
-  s.add_development_dependency('minitest')
+  s.add_development_dependency('minitest', '~> 4.7')
   s.add_development_dependency('simplecov')
   s.add_development_dependency('rdoc')
   s.add_development_dependency('sqlite3')
   s.add_development_dependency('fakeweb')
-  s.add_development_dependency('strong_parameters')
+  # s.add_development_dependency('strong_parameters')
 end

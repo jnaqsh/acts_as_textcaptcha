@@ -67,10 +67,11 @@ describe 'Textcaptcha' do
       @note.valid?.must_equal true
     end
 
-    it 'should protect skip_textcaptcha attribute from mass assignment' do
-      @note = Note.new(:skip_textcaptcha => true)
-      @note.skip_textcaptcha.must_equal nil
-    end
+    # removed from rails 4
+    # it 'should protect skip_textcaptcha attribute from mass assignment' do
+    #   @note = Note.new(:skip_textcaptcha => true)
+    #   @note.skip_textcaptcha.must_equal nil
+    # end
   end
 
   describe 'with strong parameters' do
@@ -136,7 +137,7 @@ describe 'Textcaptcha' do
       @review  = Review.new
       question = 'If tomorrow is Saturday, what day is today?'
       body     = "<captcha><question>#{question}</question><answer>f6f7fec07f372b7bd5eb196bbca0f3f4</answer></captcha>"
-      FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :body => body)
+      FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :body => body)
 
       @review.textcaptcha
       @review.spam_question.must_equal(question)
@@ -148,7 +149,7 @@ describe 'Textcaptcha' do
       @review  = Review.new
       question = 'If tomorrow is Saturday, what day is today?'
       body     = "<captcha><question>#{question}</question><answer>1</answer><answer>2</answer><answer>3</answer></captcha>"
-      FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :body => body)
+      FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :body => body)
 
       @review.textcaptcha
       @review.spam_question.must_equal(question)
@@ -166,7 +167,7 @@ describe 'Textcaptcha' do
         it 'when errors occur' do
           [SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED, Errno::ETIMEDOUT,
            Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError, URI::InvalidURIError].each do |error|
-            FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :exception => error)
+            FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :exception => error)
             @review.textcaptcha
             @review.spam_question.must_equal('The green hat is what color?')
             @review.spam_answers.wont_be_nil
@@ -174,14 +175,14 @@ describe 'Textcaptcha' do
         end
 
         it 'when response is OK but body cannot be parsed as XML' do
-          FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :body => 'here be gibberish')
+          FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :body => 'here be gibberish')
           @review.textcaptcha
           @review.spam_question.must_equal('The green hat is what color?')
           @review.spam_answers.wont_be_nil
         end
 
         it 'when response is OK but empty' do
-          FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :body => '')
+          FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :body => '')
           @review.textcaptcha
           @review.spam_question.must_equal('The green hat is what color?')
           @review.spam_answers.wont_be_nil
@@ -192,7 +193,7 @@ describe 'Textcaptcha' do
     it 'should not generate any spam question or answer when no user defined questions set' do
       @comment = Comment.new
 
-      FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :exception => SocketError)
+      FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :exception => SocketError)
       @comment.textcaptcha
       @comment.spam_question.must_equal 'ActsAsTextcaptcha >> no API key (or questions) set and/or the textcaptcha service is currently unavailable (answer ok to bypass)'
       @comment.spam_answers.must_equal 'ok'
@@ -201,7 +202,7 @@ describe 'Textcaptcha' do
     it 'should not generate any spam question or answer when user defined questions set incorrectly' do
       @comment = MovieReview.new
 
-      FakeWeb.register_uri(:get, %r|http://textcaptcha\.com/api/|, :exception => SocketError)
+      FakeWeb.register_uri(:get, %r|http://api\.textcaptcha\.ir|, :exception => SocketError)
       @comment.textcaptcha
       @comment.spam_question.must_equal 'ActsAsTextcaptcha >> no API key (or questions) set and/or the textcaptcha service is currently unavailable (answer ok to bypass)'
       @comment.spam_answers.must_equal 'ok'
